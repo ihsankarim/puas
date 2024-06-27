@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/maindashboard}">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Edit History</title>
+
+    <!-- Correct paths to CSS files -->
+    <link rel="stylesheet" href="/css/mdb.min.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+    <section class="mt-5" layout:fragment="content">
+
+        <main style="margin-top: 58px;">
+            <div class="container pt-4">
+                <!--Section: Minimal statistics cards-->
+                <div class="container mt-4">
+                    <div class="mb-3">
+                        <h1>Edit History</h1>
+                        <form th:action="@{/history/update/{id}(id=${history.id})}" th:object="${historyRequest}"
+                            method="PUT">
+                            <div>
+                                <label>Date:</label>
+                                <input type="date" th:field="*{dateString}" class="form-control" />
+                            </div>
+                            <div>
+                                <label>Note:</label>
+                                <textarea th:field="*{note}" class="form-control"></textarea>
+                            </div>
+                            <div>
+                                <label>Status:</label>
+                                <select th:field="*{statusId}" class="form-control">
+                                    <option value="1" th:selected="${historyRequest.statusId == 1}">Waiting</option>
+                                    <option value="2" th:selected="${historyRequest.statusId == 2}">Accepted</option>
+                                    <option value="3" th:selected="${historyRequest.statusId == 3}">Rejected</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-3">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- MDB -->
+    <script type="text/javascript" src="/js/mdb.umd.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript" src="/js/admin.js"></script>
+</body>
+
+</html>
